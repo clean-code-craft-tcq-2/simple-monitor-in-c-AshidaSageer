@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
-
+#include <string.h>
 
 typedef struct {
   
@@ -32,7 +32,7 @@ void printToConsole(char message[])
 printf(message);
 }
 
-int checkparamlimits(char[] parameter, float value, float minvalue, float maxvalue){
+int checkparamlimits(char parameter[], float value, float minvalue, float maxvalue){
 if(value < minvalue){
 printToConsole(parameter + "is less than lowerlimit \n")
 return 0;
