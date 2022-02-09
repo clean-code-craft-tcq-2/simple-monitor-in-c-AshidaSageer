@@ -1,21 +1,64 @@
 #include <stdio.h>
 #include <assert.h>
 
+
+typedef struct {
+  BatteryParameters parameter;
+  char parameterName[20];
+  float minimumThreshold;
+  float maximumThreshold;
+ 
+} BatteryParameterInfo;
+
+BatteryParameterInfo parameterInfo[2];
+
+void PopulateParameterInfo(){
+  
+	strcpy(parameterInfo[0].parameterName,"Temperature");
+	parameterInfo[0].minimumThreshold = 0;
+	parameterInfo[0].maximumThreshold = 45;
+	
+	strcpy(parameterInfo[1].parameterName, "SOC");
+	parameterInfo[1].minimumThreshold = 20;
+	parameterInfo[1].maximumThreshold = 80;
+	
+	strcpy(parameterInfo[2].parameterName, "Charge Rate");  
+	parameterInfo[2].minimumThreshold = 0.0;
+	parameterInfo[2].maximumThreshold = 0.8;
+}
+
+void printToConsole(char message[])
+{
+printf(message);
+}
+
+int checkparamlimits( parameter, float value, float minvalue, float maxvalue){
+if(value < minvalue){
+printToConsole(parameter + "is less than lowerlimit \n")
+return 0;
+}
+else if( value > maxvalue){
+printToConsole(parameter + "exceeds upperlimit \n")
+return 0;
+}
+else {
+return 1;
+}
+}
+
 int batteryIsOk(float temperature, float soc, float chargeRate) {
-  if(temperature < 0 || temperature > 45) {
-    printf("Temperature out of range!\n");
-    return 0;
-  } else if(soc < 20 || soc > 80) {
-    printf("State of Charge out of range!\n");
-    return 0;
-  } else if(chargeRate > 0.8) {
-    printf("Charge Rate out of range!\n");
-    return 0;
-  }
-  return 1;
+int output;
+output = checkparamlimits (parameterInfo[0].parameterName, temperature,parameterInfo[0].minimumThreshold,parameterInfo[0].maximumThreshold)&
+checkparamlimits (parameterInfo[1].parameterName, soc,parameterInfo[1].minimumThreshold,parameterInfo[1].maximumThreshold) &
+checkparamlimits (parameterInfo[2].parameterName, soc,parameterInfo[2].minimumThreshold,parameterInfo[2].maximumThreshold);
+
+return output;
 }
 
 int main() {
+  PopulateParameterInfo();
   assert(batteryIsOk(25, 70, 0.7));
-  assert(!batteryIsOk(50, 85, 0));
+  assert(batteryIsOk(50, 60, 0.7));
+  assert(!batteryIsOk(30, 85, 0.1));
+  assert(batteryIsOk(25, 70, 0.9));
 }
