@@ -58,7 +58,7 @@ return output;
 int main() {
   PopulateParameterInfo();
   assert(batteryIsOk(25, 70, 0.7));
-  assert(batteryIsOk(50, 60, 0.7));
+  assert(!batteryIsOk(50, 60, 0.7));
   assert(!batteryIsOk(30, 85, 0.1));
-  assert(batteryIsOk(25, 70, 0.9));
+  assert(!batteryIsOk(25, 70, 0.9));
 }
