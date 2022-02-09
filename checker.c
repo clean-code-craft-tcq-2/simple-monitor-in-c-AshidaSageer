@@ -3,7 +3,7 @@
 
 
 typedef struct {
-  BatteryParameters parameter;
+  
   char parameterName[20];
   float minimumThreshold;
   float maximumThreshold;
@@ -32,7 +32,7 @@ void printToConsole(char message[])
 printf(message);
 }
 
-int checkparamlimits( parameter, float value, float minvalue, float maxvalue){
+int checkparamlimits(char[] parameter, float value, float minvalue, float maxvalue){
 if(value < minvalue){
 printToConsole(parameter + "is less than lowerlimit \n")
 return 0;
@@ -50,7 +50,7 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
 int output;
 output = checkparamlimits (parameterInfo[0].parameterName, temperature,parameterInfo[0].minimumThreshold,parameterInfo[0].maximumThreshold)&
 checkparamlimits (parameterInfo[1].parameterName, soc,parameterInfo[1].minimumThreshold,parameterInfo[1].maximumThreshold) &
-checkparamlimits (parameterInfo[2].parameterName, soc,parameterInfo[2].minimumThreshold,parameterInfo[2].maximumThreshold);
+checkparamlimits (parameterInfo[2].parameterName, chargeRate,parameterInfo[2].minimumThreshold,parameterInfo[2].maximumThreshold);
 
 return output;
 }
