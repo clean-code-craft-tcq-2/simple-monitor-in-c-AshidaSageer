@@ -34,16 +34,16 @@ printf(message);
 
 int checkparamlimits(char parameter[], float value, float minvalue, float maxvalue){
 if(value < minvalue){
-printToConsole(parameter + "is less than lowerlimit \n")
-return 0;
-}
+	printToConsole(strcat(parameter , "is less than lowerlimit \n"));
+	return 0;
+	}
 else if( value > maxvalue){
-printToConsole(parameter + "exceeds upperlimit \n")
-return 0;
-}
+	printToConsole(strcat(parameter , "exceeds upperlimit \n"));
+	return 0;
+	}
 else {
-return 1;
-}
+	return 1;
+	}
 }
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
