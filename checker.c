@@ -7,7 +7,8 @@ typedef struct {
   char parameterName[20];
   float minimumThreshold;
   float maximumThreshold;
- 
+  float warningLimitHigh;
+  float warningLimitLow;
 } BatteryParameterInfo;
 
 BatteryParameterInfo parameterInfo[2];
@@ -17,14 +18,20 @@ void PopulateParameterInfo(){
 	strcpy(parameterInfo[0].parameterName,"Temperature");
 	parameterInfo[0].minimumThreshold = 0;
 	parameterInfo[0].maximumThreshold = 45;
+	parameterInfo[0].warningLimitHigh = 45;
+	parameterInfo[0].warningLimitHigh = 45;
 	
 	strcpy(parameterInfo[1].parameterName, "SOC");
 	parameterInfo[1].minimumThreshold = 20;
 	parameterInfo[1].maximumThreshold = 80;
+	parameterInfo[0].warningLimitHigh = 45;
+	parameterInfo[0].warningLimitHigh = 45;
 	
 	strcpy(parameterInfo[2].parameterName, "Charge Rate");  
 	parameterInfo[2].minimumThreshold = 0.0;
 	parameterInfo[2].maximumThreshold = 0.8;
+	parameterInfo[0].warningLimitHigh = 45;
+	parameterInfo[0].warningLimitHigh = 45;
 }
 
 void printToConsole(char message[])
