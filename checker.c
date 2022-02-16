@@ -40,7 +40,7 @@ printf(message);
 }
 
 
-/*int checkparamlimits(BatteryParameterInfo parameterInfo,  float value){	
+int checkparamlimits(BatteryParameterInfo parameterInfo,  float value){	
 if(value < parameterInfo.minimumThreshold){
 	printToConsole(strcat(parameterInfo.parameterName , "is less than lowerlimit \n"));
 	return 0;
@@ -52,7 +52,7 @@ else if( value > parameterInfo.maximumThreshold){
 else {
 	return 1;
 	}
-}*/
+}
 
 int checkForWarnings(BatteryParameterInfo parameterInfo,  float value){	
 if(value < parameterInfo.warningLimitLow){
