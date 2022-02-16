@@ -21,9 +21,9 @@ typedef struct {
 
 BatteryParameterInfo parameterInfo[3];
 
-enum language{
+enum Language{
 	English,
-	German};
+	German} language;
 
 void PopulateParameterInfo(){
   
@@ -52,7 +52,7 @@ char* EnglishMessage[]= {
 	"exceeds upperlimit \n",
 	"is approaching lowerlimit \n"
 	"is approaching upperlimit \n"
-	}
+	};
 
 char* GermanMessage[]= {
 	"es ist okay \n",
@@ -60,7 +60,7 @@ char* GermanMessage[]= {
 	"Obergrenze überschreitet \n",
 	"nähert sich der unteren Grenze \n"
 	"nähert sich der Obergrenze \n"
-	}
+	};
 
 
 	
