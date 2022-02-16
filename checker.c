@@ -21,6 +21,10 @@ typedef struct {
 
 BatteryParameterInfo parameterInfo[3];
 
+enum language{
+	English,
+	German};
+
 void PopulateParameterInfo(){
   
 	strcpy(parameterInfo[0].parameterName,"Temperature");
@@ -42,33 +46,67 @@ void PopulateParameterInfo(){
 	parameterInfo[2].warningLimitLow = (LOWER_THRESHOLD_BATT_CHARGE_RATE - (LOWER_THRESHOLD_BATT_CHARGE_RATE * TOLERANCE_PERCENTAGE));
 }
 
+char* EnglishMessage[]= {
+	"is okay \n",
+	"is less than lowerlimit \n",
+	"exceeds upperlimit \n",
+	"is approaching lowerlimit \n"
+	"is approaching upperlimit \n"
+	}
+
+char* GermanMessage[]= {
+	"es ist okay \n",
+	"ist kleiner als untere Grenze \n",
+	"Obergrenze überschreitet \n",
+	"nähert sich der unteren Grenze \n"
+	"nähert sich der Obergrenze \n"
+	}
+
+
+	
 void printToConsole(char message[])
 {
 printf(message);
 }
 
+setMessageToPrint (char parameter[], int parameterStatus){
+	if(language == 0) {
+	printToConsole(strcat(parameter , EnglishMessage[parameterStatus]));	
+	}
+	else if (language ==1){
+	printToConsole(strcat(parameter , GermanMessage[parameterStatus]));	
+	}
+}
+
+
 
 int checkparamlimits(BatteryParameterInfo parameterInfo,  float value){	
+	
 if(value < parameterInfo.minimumThreshold){
-	printToConsole(strcat(parameterInfo.parameterName , "is less than lowerlimit \n"));
+	//printToConsole(strcat(parameterInfo.parameterName , "is less than lowerlimit \n"));
+	setMessageToPrint (parameterInfo.parameterName , 1);
 	return 0;
 	}
 else if( value > parameterInfo.maximumThreshold){
-	printToConsole(strcat(parameterInfo.parameterName , "exceeds upperlimit \n"));
+	//printToConsole(strcat(parameterInfo.parameterName , "exceeds upperlimit \n"));
+	setMessageToPrint (parameterInfo.parameterName , 2);
 	return 0;
 	}
 else {
+	setMessageToPrint (parameterInfo.parameterName , 0);
 	return 1;
 	}
 }
 
 int checkForWarnings(BatteryParameterInfo parameterInfo,  float value){	
 if(value < parameterInfo.warningLimitLow){
-	printToConsole(strcat(parameterInfo.parameterName , "is approaching lowerlimit \n"));
+	//printToConsole(strcat(parameterInfo.parameterName , "is approaching lowerlimit \n"));
+	setMessageToPrint (parameterInfo.parameterName , 3);
 	return 0;
 	}
 else if( value > parameterInfo.warningLimitHigh){
-	printToConsole(strcat(parameterInfo.parameterName , "is approaching upperlimit \n"));
+	//printToConsole(strcat(parameterInfo.parameterName , "is approaching upperlimit \n"));
+	setMessageToPrint (parameterInfo.parameterName , 4);
 	return 0;
 	}
 else {
@@ -96,8 +134,10 @@ return output;
 
 int main() {
   PopulateParameterInfo();
+	language = 0;
   assert(batteryIsOk(25, 70, 0.7));
   assert(!batteryIsOk(50, 60, 0.7));
+	language =1;
   assert(!batteryIsOk(30, 85, 0.1));
   assert(!batteryIsOk(25, 70, 0.9));
 }
