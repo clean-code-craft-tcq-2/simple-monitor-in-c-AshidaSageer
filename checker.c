@@ -2,6 +2,14 @@
 #include <assert.h>
 #include <string.h>
 
+#define LOWER_THRESHOLD_BATT_TEMP 0
+#define UPPER_THRESHOLD_BATT_TEMP 45
+#define LOWER_THRESHOLD_BATT_SOC 20
+#define UPPER_THRESHOLD_BATT_SOC 80
+#define UPPER_THRESHOLD_BATT_CHARGE_RATE 0.8
+#define LOWER_THRESHOLD_BATT_CHARGE_RATE 0.5
+#define TOLERANCE_PERCENTAGE 0.05
+
 typedef struct {
   
   char parameterName[20];
@@ -16,22 +24,22 @@ BatteryParameterInfo parameterInfo[3];
 void PopulateParameterInfo(){
   
 	strcpy(parameterInfo[0].parameterName,"Temperature");
-	parameterInfo[0].minimumThreshold = 0;
-	parameterInfo[0].maximumThreshold = 45;
-	parameterInfo[0].warningLimitHigh = 45;
-	parameterInfo[0].warningLimitLow = 45;
+	parameterInfo[0].minimumThreshold = LOWER_THRESHOLD_BATT_TEMP;
+	parameterInfo[0].maximumThreshold = UPPER_THRESHOLD_BATT_TEMP;
+	parameterInfo[0].warningLimitHigh = (UPPER_THRESHOLD_BATT_TEMP + (UPPER_THRESHOLD_BATT_TEMP * TOLERANCE_PERCENTAGE);
+	parameterInfo[0].warningLimitLow = (LOWER_THRESHOLD_BATT_TEMP - (LOWER_THRESHOLD_BATT_TEMP * TOLERANCE_PERCENTAGE);
 	
 	strcpy(parameterInfo[1].parameterName, "SOC");
-	parameterInfo[1].minimumThreshold = 20;
-	parameterInfo[1].maximumThreshold = 80;
-	parameterInfo[1].warningLimitHigh = 45;
-	parameterInfo[1].warningLimitLow = 45;
+	parameterInfo[1].minimumThreshold = LOWER_THRESHOLD_BATT_SOC;
+	parameterInfo[1].maximumThreshold = UPPER_THRESHOLD_BATT_SOC;
+	parameterInfo[1].warningLimitHigh = (UPPER_THRESHOLD_BATT_SOC + (UPPER_THRESHOLD_BATT_SOC * TOLERANCE_PERCENTAGE);
+	parameterInfo[1].warningLimitLow = (LOWER_THRESHOLD_BATT_SOC - (LOWER_THRESHOLD_BATT_SOC * TOLERANCE_PERCENTAGE);
 	
 	strcpy(parameterInfo[2].parameterName, "Charge Rate");  
-	parameterInfo[2].minimumThreshold = 0.0;
-	parameterInfo[2].maximumThreshold = 0.8;
-	parameterInfo[2].warningLimitHigh = 45;
-	parameterInfo[2].warningLimitLow = 45;
+	parameterInfo[2].minimumThreshold = LOWER_THRESHOLD_BATT_CHARGE_RATE;
+	parameterInfo[2].maximumThreshold = UPPER_THRESHOLD_BATT_CHARGE_RATE;
+	parameterInfo[2].warningLimitHigh = (UPPER_THRESHOLD_BATT_CHARGE_RATE + (UPPER_THRESHOLD_BATT_CHARGE_RATE * TOLERANCE_PERCENTAGE);
+	parameterInfo[2].warningLimitLow = (LOWER_THRESHOLD_BATT_CHARGE_RATE - (LOWER_THRESHOLD_BATT_CHARGE_RATE * TOLERANCE_PERCENTAGE);
 }
 
 void printToConsole(char message[])
