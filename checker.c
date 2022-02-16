@@ -71,9 +71,13 @@ else {
 
 int batteryIsOk(float temperature, float soc, float chargeRate) {
 int output;
-output = checkparamlimits (parameterInfo[0].parameterName, temperature,parameterInfo[0].minimumThreshold,parameterInfo[0].maximumThreshold)&
+/*output = checkparamlimits (parameterInfo[0].parameterName, temperature,parameterInfo[0].minimumThreshold,parameterInfo[0].maximumThreshold)&
 checkparamlimits (parameterInfo[1].parameterName, soc,parameterInfo[1].minimumThreshold,parameterInfo[1].maximumThreshold) &
-checkparamlimits (parameterInfo[2].parameterName, chargeRate,parameterInfo[2].minimumThreshold,parameterInfo[2].maximumThreshold);
+checkparamlimits (parameterInfo[2].parameterName, chargeRate,parameterInfo[2].minimumThreshold,parameterInfo[2].maximumThreshold);*/
+	
+output = checkparamlimits (parameterInfo[0], temperature)&
+checkparamlimits (parameterInfo[1], soc) &
+checkparamlimits (parameterInfo[2], chargeRate);
 
 return output;
 }
