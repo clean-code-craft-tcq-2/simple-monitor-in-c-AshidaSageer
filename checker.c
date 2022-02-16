@@ -11,7 +11,7 @@ typedef struct {
   float warningLimitLow;
 } BatteryParameterInfo;
 
-BatteryParameterInfo parameterInfo[2];
+BatteryParameterInfo parameterInfo[3];
 
 void PopulateParameterInfo(){
   
@@ -39,13 +39,29 @@ void printToConsole(char message[])
 printf(message);
 }
 
-int checkparamlimits(char parameter[], float value, float minvalue, float maxvalue){
+/*int checkparamlimits(char parameter[], float value, float minvalue, float maxvalue){
 if(value < minvalue){
 	printToConsole(strcat(parameter , "is less than lowerlimit \n"));
 	return 0;
 	}
 else if( value > maxvalue){
 	printToConsole(strcat(parameter , "exceeds upperlimit \n"));
+	return 0;
+	}
+else {
+	return 1;
+	}
+}*/
+
+
+int checkparamlimits(BatteryParameterInfo parameterInfo,  float value){
+	
+if(value < parameterInfo.minimumThreshold){
+	printToConsole(strcat(parameterInfo.parameterName , "is less than lowerlimit \n"));
+	return 0;
+	}
+else if( value > parameterInfo.maximumThreshold){
+	printToConsole(strcat(parameterInfo.parameterName , "exceeds upperlimit \n"));
 	return 0;
 	}
 else {
